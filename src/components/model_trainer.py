@@ -46,8 +46,22 @@ class ModelTrainer:
                 "XGB Regressor": xgb.XGBRegressor(),
                 "CatBoost Regressor": CatBoostRegressor(verbose=False)
             }
+
+
+            params = {
+                "Linear Regression": {},
+                "Ridge": {"alpha": [0.1,1.0,10.0]},
+                "Lasso": {"alpha": [0.1,1.0,10.0]},
+                "ElasticNet": {"alpha": [0.1,1.0,10.0], "l1_ratio": [0.1,0.5,0.9]},
+                "K-Neighbors Regressor": {"n_neighbors": [3,5,7]},
+                "Decision Tree": {"max_depth": [3,5,7]},
+                "Random Forest": {"n_estimators": [50,100,200], "max_depth": [3,5,7]},
+                "AdaBoost Regressor": {"n_estimators": [50,100,200]},
+                "XGB Regressor": {"n_estimators": [50,100,200], "learning_rate": [0.01,0.1,0.2]},
+                "CatBoost Regressor": {"iterations": [50,100,200], "learning_rate": [0.01,0.1,0.2]}
+            }
             # best model score from dict
-            model_report:dict=evaluate_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test, models=models)
+            model_report:dict=evaluate_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test, models=models,params=params)
 
             #best model name from dict
             best_model_score = max(sorted(model_report.values()))

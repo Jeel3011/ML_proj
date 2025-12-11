@@ -14,6 +14,13 @@ def save_object(file_path, obj):
     except Exception as e:
         raise CustomException(f"Error saving object: {e}", sys)
 
+def load_object(file_path):
+    try:
+        obj = pd.read_pickle(file_path)
+        return obj
+    except Exception as e:
+        raise CustomException(f"Error loading object: {e}", sys)
+
 def evaluate_model(X_train, y_train, X_test, y_test, models, params):
     try:
         report={}

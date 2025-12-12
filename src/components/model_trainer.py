@@ -10,8 +10,6 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
-import xgboost as xgb 
-from catboost import CatBoostRegressor
 from src.utils import save_object,evaluate_model
 from sklearn.metrics import  r2_score
 
@@ -42,9 +40,7 @@ class ModelTrainer:
                 "K-Neighbors Regressor": KNeighborsRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
                 "Random Forest": RandomForestRegressor(),
-                "AdaBoost Regressor": AdaBoostRegressor(),
-                "XGB Regressor": xgb.XGBRegressor(),
-                "CatBoost Regressor": CatBoostRegressor(verbose=False)
+                "AdaBoost Regressor": AdaBoostRegressor()
             }
 
 
@@ -56,9 +52,7 @@ class ModelTrainer:
                 "K-Neighbors Regressor": {"n_neighbors": [3,5,7]},
                 "Decision Tree": {"max_depth": [3,5,7]},
                 "Random Forest": {"n_estimators": [50,100,200], "max_depth": [3,5,7]},
-                "AdaBoost Regressor": {"n_estimators": [50,100,200]},
-                "XGB Regressor": {"n_estimators": [50,100,200], "learning_rate": [0.01,0.1,0.2]},
-                "CatBoost Regressor": {"iterations": [50,100,200], "learning_rate": [0.01,0.1,0.2]}
+                "AdaBoost Regressor": {"n_estimators": [50,100,200]}
             }
             # best model score from dict
             model_report:dict=evaluate_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test, models=models,params=params)

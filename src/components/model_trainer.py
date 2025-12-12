@@ -10,6 +10,8 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
+import xgboost as xgb 
+from catboost import CatBoostRegressor
 from src.utils import save_object,evaluate_model
 from sklearn.metrics import  r2_score
 
@@ -38,7 +40,9 @@ class ModelTrainer:
                 "Lasso": Lasso(),
                 "ElasticNet": ElasticNet(),
                 "K-Neighbors Regressor": KNeighborsRegressor(),
-                "Decision Tree": DecisionTreeRegressor(),
+                "Decision Tree": DecisionTreeRegressor(),,
+                "XGB Regressor": xgb.XGBRegressor(),
+                "CatBoost Regressor": CatBoostRegressor(verbose=False)
                 "Random Forest": RandomForestRegressor(),
                 "AdaBoost Regressor": AdaBoostRegressor()
             }
@@ -50,7 +54,9 @@ class ModelTrainer:
                 "Lasso": {"alpha": [0.1,1.0,10.0]},
                 "ElasticNet": {"alpha": [0.1,1.0,10.0], "l1_ratio": [0.1,0.5,0.9]},
                 "K-Neighbors Regressor": {"n_neighbors": [3,5,7]},
-                "Decision Tree": {"max_depth": [3,5,7]},
+                "Decision Tree": {"max_depth": [3,5,7]},,
+                "XGB Regressor": {"n_estimators": [50,100,200], "learning_rate": [0.01,0.1,0.2]},
+                "CatBoost Regressor": {"iterations": [50,100,200], "learning_rate": [0.01,0.1,0.2]}
                 "Random Forest": {"n_estimators": [50,100,200], "max_depth": [3,5,7]},
                 "AdaBoost Regressor": {"n_estimators": [50,100,200]}
             }
